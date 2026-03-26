@@ -56,6 +56,12 @@ public class LoanApplication {
   @Column(name = "updated_at")
   private OffsetDateTime updatedAt;
 
+  @Column(name = "disbursed_at")
+  private OffsetDateTime disbursedAt;
+
+  @Column(name = "disbursement_amount")
+  private BigDecimal disbursementAmount;
+
   public UUID getId() {
     return id;
   }
@@ -142,6 +148,22 @@ public class LoanApplication {
 
   public void setUpdatedAt(OffsetDateTime updatedAt) {
     this.updatedAt = updatedAt;
+  }
+
+  public OffsetDateTime getDisbursedAt() {
+    return disbursedAt;
+  }
+
+  public void setDisbursedAt(OffsetDateTime disbursedAt) {
+    this.disbursedAt = disbursedAt;
+  }
+
+  public BigDecimal getDisbursementAmount() {
+    return disbursementAmount;
+  }
+
+  public void setDisbursementAmount(BigDecimal disbursementAmount) {
+    this.disbursementAmount = disbursementAmount;
   }
 }
 

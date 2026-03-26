@@ -1,14 +1,14 @@
 import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../../core/services/auth.service';
 import { catchError, of } from 'rxjs';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, RouterLink],
   template: `
     <section class="py-10 lg:py-20">
       <div class="mx-auto max-w-xl">
@@ -23,6 +23,10 @@ import { catchError, of } from 'rxjs';
         </h1>
         <p class="mt-4 text-base leading-relaxed text-blue_slate-600">
           Use your tenant credentials to access dashboards, review applications, and manage schemas.
+        </p>
+        <p class="mt-2 text-sm text-blue_slate-600">
+          Don't have an account?
+          <a routerLink="/signup" class="text-coral_glow-500 hover:underline font-medium">Sign up free →</a>
         </p>
 
         <div class="mt-8 rounded-2xl border border-silver-700 bg-white p-8 shadow-card-md">

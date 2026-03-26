@@ -23,12 +23,14 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     User user = userRepository.findByEmail(email)
         .orElseThrow(() -> new UsernameNotFoundException("User not found"));
 
+    boolean isDisabled = "INACTIVE".equals(user.getStatus());
+
     return org.springframework.security.core.userdetails.User
         .withUsername(user.getEmail())
         .password(user.getPasswordHash())
         .authorities(user.getRoles().stream().map(SimpleGrantedAuthority::new).collect(Collectors.toSet()))
         .accountLocked(false)
-        .disabled(false)
+        .disabled(isDisabled)
         .build();
   }
 }

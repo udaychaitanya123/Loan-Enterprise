@@ -10,6 +10,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.util.HashSet;
 import java.util.Set;
@@ -45,6 +46,15 @@ public class User {
 
   @Column(name = "updated_at")
   private OffsetDateTime updatedAt;
+
+  @Column(name = "mobile_number")
+  private String mobileNumber;
+
+  @Column(name = "date_of_birth")
+  private LocalDate dateOfBirth;
+
+  @Column(name = "profile_updated_at")
+  private OffsetDateTime profileUpdatedAt;
 
   @ElementCollection(fetch = FetchType.EAGER)
   @CollectionTable(
@@ -124,6 +134,30 @@ public class User {
 
   public void setUpdatedAt(OffsetDateTime updatedAt) {
     this.updatedAt = updatedAt;
+  }
+
+  public String getMobileNumber() {
+    return mobileNumber;
+  }
+
+  public void setMobileNumber(String mobileNumber) {
+    this.mobileNumber = mobileNumber;
+  }
+
+  public LocalDate getDateOfBirth() {
+    return dateOfBirth;
+  }
+
+  public void setDateOfBirth(LocalDate dateOfBirth) {
+    this.dateOfBirth = dateOfBirth;
+  }
+
+  public OffsetDateTime getProfileUpdatedAt() {
+    return profileUpdatedAt;
+  }
+
+  public void setProfileUpdatedAt(OffsetDateTime profileUpdatedAt) {
+    this.profileUpdatedAt = profileUpdatedAt;
   }
 }
 

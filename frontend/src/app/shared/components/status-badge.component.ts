@@ -20,10 +20,15 @@ export class StatusBadgeComponent {
 
   statusLabel(): string {
     if (this.status === 'PENDING_REVIEW') return 'Pending';
+    if (this.status === 'SUBMITTED') return 'Submitted';
+    if (this.status === 'UNDER_REVIEW') return 'Under Review';
     if (this.status === 'APPROVED') return 'Approved';
     if (this.status === 'REJECTED') return 'Rejected';
     if (this.status === 'REFERRED') return 'Referred';
     if (this.status === 'DRAFT') return 'Draft';
+    if (this.status === 'DISBURSED') return 'Disbursed';
+    if (this.status === 'REPAYING') return 'Repaying';
+    if (this.status === 'CLOSED') return 'Closed';
     return this.status;
   }
 
@@ -49,6 +54,8 @@ export class StatusBadgeComponent {
       case 'APPROVED':
         return 'bg-jet_black-500';
       case 'PENDING_REVIEW':
+      case 'UNDER_REVIEW':
+      case 'SUBMITTED':
         return 'bg-coral_glow-500 animate-pulse-dot';
       case 'REJECTED':
         return 'bg-silver-900';
@@ -56,6 +63,11 @@ export class StatusBadgeComponent {
         return 'bg-blue_slate-500';
       case 'DRAFT':
         return 'bg-silver-500';
+      case 'DISBURSED':
+      case 'REPAYING':
+        return 'bg-green-500 animate-pulse-dot';
+      case 'CLOSED':
+        return 'bg-blue_slate-600';
       default:
         return 'bg-silver-500';
     }

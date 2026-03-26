@@ -1,9 +1,8 @@
--- Two demo tenants
 INSERT INTO tenants (id, name, domain_key, config_json) VALUES
   ('aaaaaaaa-0000-0000-0000-000000000001', 'Alpha Bank', 'alpha-bank',
-   '{"primaryColor":"#1B3F7A","logo":"alpha-logo.png"}'::jsonb),
+   '{"primaryColor":"#1B3F7A","logo":"alpha-logo.png","interestRate":12.5,"processingFee":1.0,"maxLoanAmount":500000,"minLoanAmount":1000}'::jsonb),
   ('bbbbbbbb-0000-0000-0000-000000000002', 'Beta Finance', 'beta-finance',
-   '{"primaryColor":"#7A1B1B","logo":"beta-logo.png"}'::jsonb);
+   '{"primaryColor":"#7A1B1B","logo":"beta-logo.png","interestRate":14.0,"processingFee":2.0,"maxLoanAmount":200000,"minLoanAmount":500}'::jsonb);
 
 -- Ensure we can generate bcrypt hashes for the demo password.
 CREATE EXTENSION IF NOT EXISTS pgcrypto;
@@ -21,12 +20,17 @@ INSERT INTO users (id, tenant_id, email, full_name, password_hash) VALUES
   ('33333333-0000-0000-0000-000000000003',
    'aaaaaaaa-0000-0000-0000-000000000001',
    'applicant@alphabank.com', 'Alice Applicant',
+   crypt('password123', gen_salt('bf', 12))),
+  ('44444444-0000-0000-0000-000000000004',
+   'bbbbbbbb-0000-0000-0000-000000000002',
+   'admin@betafinance.com', 'Beta Admin',
    crypt('password123', gen_salt('bf', 12)));
 
 INSERT INTO user_roles VALUES
   ('11111111-0000-0000-0000-000000000001', 'TENANT_ADMIN'),
   ('22222222-0000-0000-0000-000000000002', 'LOAN_OFFICER'),
-  ('33333333-0000-0000-0000-000000000003', 'APPLICANT');
+  ('33333333-0000-0000-0000-000000000003', 'APPLICANT'),
+  ('44444444-0000-0000-0000-000000000004', 'TENANT_ADMIN');
 
 -- Demo form schema for Alpha Bank — Personal Loan
 INSERT INTO form_schemas (tenant_id, loan_type, version, schema_json) VALUES
